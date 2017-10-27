@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :directors
   resources :actors
   resources :movies
   devise_for :admin_users, ActiveAdmin::Devise.config
