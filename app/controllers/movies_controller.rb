@@ -1,5 +1,5 @@
 class MoviesController < InheritedResources::Base
-
+  before_action :authenticate_user!
   def index
     @movies = Movie.all
   end
@@ -7,8 +7,20 @@ class MoviesController < InheritedResources::Base
   def recently_opened_movies_within_a_week
     beginning_of_the_week = Date.today.beginning_of_week(start_day = :sunday).strftime('%Y-%m-%d')
     the_end_of_the_week = Date.today.end_of_week(start_day = :sunday).strftime('%Y-%m-%d')
-    
+
     @movies = Movie.where("releasing_date >= ?", beginning_of_the_week).where("releasing_date <= ?", the_end_of_the_week).order("releasing_date ASC")
+  end
+
+  def add_to_watchlist
+
+    movie = current_user.movies.build
+
+    if movie.save
+      render json: { "movie" : movie.to_json }, status: :ok
+    elsif
+      render json: {}, status: :unprocessable_entity
+    end
+
   end
 
   private

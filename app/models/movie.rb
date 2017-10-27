@@ -1,5 +1,6 @@
 class Movie < ApplicationRecord
-  has_many :actors
-  has_one :director
-  has_many :genres
+  has_and_belongs_to_many :actors
+  belongs_to :director
+  has_and_belongs_to_many :genres
+  has_many :watchlists
 end

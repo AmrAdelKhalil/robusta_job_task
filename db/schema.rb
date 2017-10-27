@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171027093111) do
+ActiveRecord::Schema.define(version: 20171027135403) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -28,10 +28,15 @@ ActiveRecord::Schema.define(version: 20171027093111) do
 
   create_table "actors", force: :cascade do |t|
     t.string "name"
-    t.integer "movie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["movie_id"], name: "index_actors_on_movie_id"
+  end
+
+  create_table "actors_movies", force: :cascade do |t|
+    t.integer "actor_id"
+    t.integer "movie_id"
+    t.index ["actor_id"], name: "index_actors_movies_on_actor_id"
+    t.index ["movie_id"], name: "index_actors_movies_on_movie_id"
   end
 
   create_table "admin_users", force: :cascade do |t|
@@ -53,25 +58,30 @@ ActiveRecord::Schema.define(version: 20171027093111) do
 
   create_table "directors", force: :cascade do |t|
     t.string "name"
-    t.integer "movie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["movie_id"], name: "index_directors_on_movie_id"
   end
 
   create_table "genres", force: :cascade do |t|
     t.string "name"
-    t.integer "movie_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["movie_id"], name: "index_genres_on_movie_id"
+  end
+
+  create_table "genres_movies", force: :cascade do |t|
+    t.integer "genre_id"
+    t.integer "movie_id"
+    t.index ["genre_id"], name: "index_genres_movies_on_genre_id"
+    t.index ["movie_id"], name: "index_genres_movies_on_movie_id"
   end
 
   create_table "movies", force: :cascade do |t|
     t.string "name"
+    t.integer "director_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.date "releasing_date"
+    t.index ["director_id"], name: "index_movies_on_director_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -89,6 +99,15 @@ ActiveRecord::Schema.define(version: 20171027093111) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  create_table "watchlists", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "movie_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["movie_id"], name: "index_watchlists_on_movie_id"
+    t.index ["user_id"], name: "index_watchlists_on_user_id"
   end
 
 end

@@ -8,8 +8,9 @@
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
 if Rails.env.development?
-  Movie.create!(name: "The mask")
-  Actor.create!(name: "Jim Carry", movie_id: 1)
-  Director.create!(name: "Jack", movie_id: 1)
-  Genre.create!(name: "Comedy", movie_id: 1)
+  User.create!(email:"a@b.com", password: "123456")
+  Director.create!(name: "Jack")
+  Movie.create!(name: "The mask", director_id: 1)
+  Actor.create!(name: "Jim Carry")
+  Genre.create!(name: "Comedy")
 end
