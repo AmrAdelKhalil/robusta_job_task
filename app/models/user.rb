@@ -6,7 +6,7 @@ class User < ApplicationRecord
 
   has_many :watchlists
   has_many :movies, through: :watchlists
-
+  has_many :reviews
 
   def self.find_for_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first

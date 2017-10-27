@@ -13,4 +13,5 @@ if Rails.env.development?
   Movie.create!(name: "The mask", director_id: 1, releasing_date: Date.today.strftime("%Y-%m-%d"))
   Actor.create!(name: "Jim Carry")
   Genre.create!(name: "Comedy")
+  Review.create(description: 'amazing', user_id:1,movie_id:1)
 end
