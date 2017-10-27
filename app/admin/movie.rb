@@ -11,5 +11,5 @@ ActiveAdmin.register Movie do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
-
+  permit_params :name, :releasing_date, :movie_id
 end
