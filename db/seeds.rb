@@ -10,7 +10,7 @@ AdminUser.create!(email: 'admin@example.com', password: 'password', password_con
 if Rails.env.development?
   User.create!(email:"a@b.com", password: "123456")
   Director.create!(name: "Jack")
-  Movie.create!(name: "The mask", director_id: 1)
+  Movie.create!(name: "The mask", director_id: 1, releasing_date: Date.today.strftime("%Y-%m-%d"))
   Actor.create!(name: "Jim Carry")
   Genre.create!(name: "Comedy")
 end

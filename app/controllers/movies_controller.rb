@@ -13,14 +13,18 @@ class MoviesController < InheritedResources::Base
 
   def add_to_watchlist
 
-    movie = current_user.movies.build
+    movie = Movie.find_by id: params[:movie_id]
 
-    if movie.save
-      render json: { "movie" : movie.to_json }, status: :ok
-    elsif
-      render json: {}, status: :unprocessable_entity
+    unless movie.nil?
+      current_user.movies << movie
+
+      if movie.save
+        render json: { "movie": movie.to_json }, status: :ok
+      elsif
+        render json: {}, status: :unprocessable_entity
+      end
     end
-
+    render json: {}, status: :unprocessable_entity
   end
 
   private

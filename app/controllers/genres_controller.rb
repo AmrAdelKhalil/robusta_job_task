@@ -5,7 +5,7 @@ class GenresController < InheritedResources::Base
     genre_record = Genre.find_by name: genre
 
     unless genre_record.nil?
-      render json: { "movies" : genre_record.movies.to_json }, status: :ok
+      render json: { "movies": genre_record.movies.to_json }, status: :ok
     end
     render json: {}, status: :unprocessable_entity
   end
