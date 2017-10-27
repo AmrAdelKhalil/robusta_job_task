@@ -1,7 +1,13 @@
-class MoviesController < InheritedResources::Base
+class MoviesController < ApplicationController
   before_action :authenticate_user!
   def index
     @movies = Movie.all
+  end
+
+  def show
+    @movie = Movie.find(params[:id])
+    @reviews = Review.movie_reviews(@movie.id)
+    @movie_rate = Review.calculate_rating(@reviews)
   end
 
   def recently_opened_movies_within_a_week

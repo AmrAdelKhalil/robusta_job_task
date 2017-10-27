@@ -1,4 +1,4 @@
-class ActorsController < InheritedResources::Base
+class ActorsController < ApplicationController
 
   private
 
@@ -6,4 +6,3 @@ class ActorsController < InheritedResources::Base
       params.require(:actor).permit()
     end
 end
-

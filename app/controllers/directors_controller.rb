@@ -1,4 +1,4 @@
-class DirectorsController < InheritedResources::Base
+class DirectorsController < ApplicationController
 
   private
 
@@ -6,4 +6,3 @@ class DirectorsController < InheritedResources::Base
       params.require(:director).permit()
     end
 end
-

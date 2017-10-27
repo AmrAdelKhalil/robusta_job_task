@@ -1,4 +1,37 @@
 <p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_movie_path(@movie) %> |
-<%= link_to 'Back', movies_path %>
+<tr>
+  <td><%= @movie.name %></td>
+  <br/>
+  rank:
+  <td><%= @movie_rate %>/5.0</td>
+</tr>
+<br />
+<br />
+<br />
+<h1>Reviews</h1>
+<hr />
+
+<table>
+  <thead>
+    <tr>
+      <th >description</th>
+      <th >rate</th>
+      <th >created_at</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @reviews.each do |review| %>
+      <tr>
+        <td><%= review.description %></td>
+        <td><%= review.rate %></td>
+        <td><%= review.created_at.strftime("%Y-%m-%d") %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br/>
+<br />
+<%= link_to 'New review', new_movie_review_path(movie_id: @movie.id) %> | <%= link_to 'Back', movies_path %>

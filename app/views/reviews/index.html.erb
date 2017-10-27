@@ -14,8 +14,10 @@
       <tr>
         <td><%= review.description %></td>
         <td><%= link_to 'Show', movie_reviews_path %></td>
-        <td><%= link_to 'Edit', edit_movie_review_path(review.movie.id,review.id) %></td>
-        <td><%= link_to 'Destroy', movie_reviews_path, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if current_user.id == review.user_id %>
+          <td><%= link_to 'Edit', edit_movie_review_path(review.movie.id,review.id) %></td>
+          <td><%= link_to 'Destroy', movie_reviews_path, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
       </tr>
     <% end %>
   </tbody>

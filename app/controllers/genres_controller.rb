@@ -1,4 +1,4 @@
-class GenresController < InheritedResources::Base
+class GenresController < ApplicationController
 
   def categorize_movies_by_genre
     genre = params[:genre]

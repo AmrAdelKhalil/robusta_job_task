@@ -1,5 +1,6 @@
-<h1>New Review</h1>
 
-<%= render 'form', review: @review %>
-
-<%= link_to 'Back', reviews_path %>
+<%= form_for @review, url: {action: "create"} do |f| %>
+  <%= f.text_field :description %>
+  <%= f.select(:rate, 1..5) %>
+  <%= f.submit "Create" %>
+<% end %>
