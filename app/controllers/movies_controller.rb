@@ -33,6 +33,12 @@ class MoviesController < ApplicationController
     render json: {}, status: :unprocessable_entity
   end
 
+  def share_movie
+    movie = Movie.find(params[:movie_id])
+    current_user.facebook.put_wall_post(movie.name)
+    render json:{}, status: :ok
+  end
+
   private
 
     def movie_params

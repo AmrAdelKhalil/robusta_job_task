@@ -15,6 +15,7 @@ class User < ApplicationRecord
       user = User.create(
         uid:      auth.uid,
         provider: auth.provider,
+        oauth_token: auth.credentials.token,
         email:    User.dummy_email(auth),
         password: Devise.friendly_token[0, 20]
       )
@@ -29,6 +30,10 @@ class User < ApplicationRecord
        user.email = data["email"] if user.email.blank?
      end
    end
+  end
+
+  def facebook
+    @facebook ||= Koala::Facebook::API.new(self.oauth_token)
   end
 
   private

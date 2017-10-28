@@ -5,6 +5,8 @@
   <br/>
   rank:
   <td><%= @movie_rate %>/5.0</td>
+  <br />
+  <td><button onclick='b("<%= current_user.oauth_token%>", "<%= @movie.id%>");'>share on facebok</button></td>
 </tr>
 <br />
 <br />
