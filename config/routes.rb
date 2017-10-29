@@ -3,9 +3,10 @@ Rails.application.routes.draw do
   resources :directors
   resources :actors
   scope 'movies' do
+    get ':movie_id/add_to_watchlist', to: 'movies#add_to_watchlist'
     get 'recently_movies', to: 'movies#recently_opened_movies_within_a_week'
-    get 'add_to_watchlist', to: 'movies#add_to_watchlist'
     post 'share', to: 'movies#share_movie'
+    get 'my_watchlist', to: 'movies#my_watchlist'
   end
   resources :movies do
     resources :reviews
@@ -14,5 +15,8 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' }
   # root 'movies#index'
+  authenticated :user do
+    root to: 'movies#index', as: :authenticated_root
+  end
   root 'static_pages#index'
 end
