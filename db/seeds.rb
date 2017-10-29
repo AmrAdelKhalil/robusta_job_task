@@ -8,10 +8,21 @@
 AdminUser.create!(email: 'admin@example.com', password: 'password', password_confirmation: 'password') if Rails.env.development?
 
 if Rails.env.development?
-  User.create!(email:"a@b.com", password: "123456")
+  User.create!(email:"user@example.com", password: "123456")
   Director.create!(name: "Jack")
-  Movie.create!(name: "The mask", director_id: 1, releasing_date: Date.today.strftime("%Y-%m-%d"))
+  first_movie = Movie.create!(name: "The mask", director_id: 1, releasing_date: Date.today.strftime("%Y-%m-%d"))
+  second_movie = Movie.create!(name: "Titanic", director_id: 1, releasing_date: Date.today.strftime("%Y-%m-%d"))
+  third_movie = Movie.create!(name: "Spider man", director_id: 1, releasing_date: Date.today.strftime("%Y-%m-%d"))
   Actor.create!(name: "Jim Carry")
+  Actor.create!(name: "Jinnefer Aniston")
+  Actor.create!(name: "Van Disel")
   Genre.create!(name: "Comedy")
+  Genre.create!(name: "Action")
+  Genre.create!(name: "Romantic")
   Review.create(description: 'amazing', user_id:1,movie_id:1)
+  Review.create(description: 'boring', user_id:1,movie_id:2)
+  first_movie.generes << Genre.first
+  first_movie.generes << Genre.second
+  second_movie.generes << Genre.first
+  third_movie.generes << Genere.second
 end

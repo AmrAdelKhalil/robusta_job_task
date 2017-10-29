@@ -7,10 +7,12 @@
         data: {"token":token, "movie_id": movie_id}
         dataType: 'html'
         error: (jqXHR, textStatus, errorThrown) ->
-            $("#failure_message").html('Something went wrong.' + jqXHR.responseText);
+            console.log("fail");
+            $("#failure_message").html('Something went wrong.' + jqXHR.responseText + ", It is facebook policy not to post the same twice you can try again after 10 minutes.");
             $("#failure").css('display','block');
             $("#success").css('display','none');
         success: (data, textStatus, jqXHR) ->
+            console.log("success");
             $("#success_message").html('You have shared this movie on facebook successfully.');
             $("#success").css('display','block');
             $("#failure").css('display','none');

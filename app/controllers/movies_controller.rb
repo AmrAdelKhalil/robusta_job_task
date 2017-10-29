@@ -29,7 +29,7 @@ class MoviesController < ApplicationController
       notice_messge = "<strong>" + movie.name.capitalize + "</strong> has been added successfully to your watchlist"
       flash[:notice] = notice_messge
     else
-      alert_message = "<strong>" + movie.name.capitalize + "</strong> has not been added to your watchlist, Something goes wrong, Try again later"
+      alert_message = " The movie has not been added to your watchlist, Something goes wrong, Try again later or it might seems that there is no such movie"
       flash[:alert] = alert_message
     end
     redirect_to root_url
@@ -43,9 +43,10 @@ class MoviesController < ApplicationController
 
     begin
       current_user.facebook.put_wall_post(description_message)
-      render json: response.to_json, status: :ok
+      render json: {}, status: :ok
     rescue => e
-      render json: e.message, status: :unprocessable_entity
+      puts '$$$$$$$$$$$$$$$$$$$$$$$$'
+      render json: e, status: :bad_request
     end
   end
 
