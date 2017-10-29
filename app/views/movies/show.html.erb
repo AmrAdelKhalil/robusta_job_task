@@ -1,39 +1,68 @@
-<p id="notice"><%= notice %></p>
+<%= render 'navbars/navbar' %>
 
-<tr>
-  <td><%= @movie.name %></td>
-  <br/>
-  rank:
-  <td><%= @movie_rate %>/5.0</td>
-  <br />
-  <td><button onclick='b("<%= current_user.oauth_token%>", "<%= @movie.id%>");'>share on facebok</button></td>
-</tr>
-<br />
-<br />
-<br />
-<h1>Reviews</h1>
-<hr />
+<div class="alert alert-success" style="display:none;" id="success">
+  <strong>Success!</strong><p id="success_message"></p>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th >description</th>
-      <th >rate</th>
-      <th >created_at</th>
-    </tr>
-  </thead>
+<div class="alert alert-danger"style="display:none;" id="failure">
+  <strong>Danger!</strong><p id="failure_message"></p>
+</div>
 
-  <tbody>
-    <% @reviews.each do |review| %>
-      <tr>
-        <td><%= review.description %></td>
-        <td><%= review.rate %></td>
-        <td><%= review.created_at.strftime("%Y-%m-%d") %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="container mtop">
 
-<br/>
-<br />
-<%= link_to 'New review', new_movie_review_path(movie_id: @movie.id) %> | <%= link_to 'Back', movies_path %>
+  <div class="row">
+    <div class="jumbotron">
+      <h1><%= @movie.name.capitalize %></h1>
+      <p>releasing date: <%= @movie.releasing_date %></p>
+      <p>rate: <%= @movie_rate %> / 5.0</p>
+      <!-- <p><a  href="#" role="button">Learn more</a></p> -->
+      <button class="btn btn-primary btn-lg" onclick='share("<%= current_user.oauth_token%>", "<%= @movie.id%>");'>share on facebook</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <h1>Reviews</h1>
+    <hr />
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th colspan="1">
+              User
+            </th>
+            <th colspan="1">
+              Description
+            </th>
+            <th colspan="1">
+              Rate of 5
+            </th>
+            <th colspan="1">
+              Created_at
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @reviews.each do |review| %>
+            <tr>
+              <td>
+                <% if review.user.provider.nil? %>
+                  <%= review.user.email %>
+                <% else %>
+                  Facebook user
+                <% end %>
+              </td>
+              <td><%= review.description %></td>
+              <td><%= review.rate %></td>
+              <td><%= review.created_at.strftime("%Y-%m-%d") %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+
+    <br/>
+    <br />
+    <%= link_to 'Add review', new_movie_review_path(movie_id: @movie.id) %> | <%= link_to 'Back', movies_path %>
+
+  </div>
+</div>

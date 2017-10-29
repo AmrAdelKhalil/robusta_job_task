@@ -9,17 +9,23 @@
   </head>
 
   <body>
-    <div id="notify">
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
-    </div>
+    <!-- <div id="notify">
+      <p class="alert alert-success"></p>
+      <p class="alert"></p>
+    </div> -->
+    <% unless notice.nil? %>
+      <div class="alert alert-success">
+        <strong>Success!</strong> <%= notice.html_safe %>
+      </div>
+    <% end %>
+
+    <% unless alert.nil? %>
+      <div class="alert alert-danger">
+        <strong>Danger!</strong> <%= alert.html_safe %>
+      </div>
+    <% end %>
+
     <div id="user-info">
-      <% if user_signed_in? %>
-        <%#= current_user.name %>
-        [<%= link_to 'Sign out', destroy_user_session_path, method: :delete  %>]
-      <% else %>
-        <%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
-      <% end %>
     </div>
     <%= yield %>
   </body>
