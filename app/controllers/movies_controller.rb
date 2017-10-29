@@ -45,7 +45,6 @@ class MoviesController < ApplicationController
       current_user.facebook.put_wall_post(description_message)
       render json: {}, status: :ok
     rescue => e
-      puts '$$$$$$$$$$$$$$$$$$$$$$$$'
       render json: e, status: :bad_request
     end
   end
