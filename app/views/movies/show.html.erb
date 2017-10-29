@@ -18,7 +18,9 @@
       <p>releasing date: <%= @movie.releasing_date %></p>
       <p>rate: <%= @movie_rate.round(1) %> / 5.0</p>
       <!-- <p><a  href="#" role="button">Learn more</a></p> -->
-      <button class="btn btn-primary btn-lg" onclick='share("<%= current_user.oauth_token%>", "<%= @movie.id%>");'>share on facebook</button>
+      <% unless current_user.provider.nil? %>
+        <button class="btn btn-primary btn-lg" onclick='share("<%= current_user.oauth_token%>", "<%= @movie.id%>");'>share on facebook</button>
+      <% end %>
     </div>
   </div>
 
@@ -50,7 +52,11 @@
                 <% if review.user.provider.nil? %>
                   <%= review.user.email %>
                 <% else %>
-                  Facebook user
+                  <% if review.user.email != review.user.uid + "-" + review.user.provider + "@example.com" %>
+                    <%= review.user.email %>
+                  <% else %>
+                    Facebook user
+                  <% end %>
                 <% end %>
               </td>
               <td><%= review.description %></td>

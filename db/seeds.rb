@@ -19,10 +19,10 @@ if Rails.env.development?
   Genre.create!(name: "Comedy")
   Genre.create!(name: "Action")
   Genre.create!(name: "Romantic")
-  Review.create(description: 'amazing', user_id:1,movie_id:1)
-  Review.create(description: 'boring', user_id:1,movie_id:2)
-  first_movie.generes << Genre.first
-  first_movie.generes << Genre.second
-  second_movie.generes << Genre.first
-  third_movie.generes << Genere.second
+  Review.create(description: 'amazing', user_id:1,movie_id:1, rate: 3)
+  Review.create(description: 'boring', user_id:1,movie_id:2, rate: 4)
+  first_movie.genres << Genre.first
+  first_movie.genres << Genre.second
+  second_movie.genres << Genre.first
+  third_movie.genres << Genre.second
 end
